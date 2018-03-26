@@ -1,50 +1,101 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"><head th:fragment="site-head">
-    <meta charset="UTF-8" />
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="site-head">
+    <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"/>
     <link href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet"/>
 
 
     <link
             href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.css"
-            rel="stylesheet"  type='text/css'/>
+            rel="stylesheet" type='text/css'/>
 
-    <link rel="stylesheet" href="../public/css/styles.css" th:href="@{/css/styles.css}" />
-    <link rel="icon" href="../public/img/logo.png" th:href="@{/img/logo.png}" />
+    <link rel="stylesheet" href="../public/css/styles.css" th:href="@{/css/styles.css}"/>
+    <link rel="icon" href="../public/img/logo.png" th:href="@{/img/logo.png}"/>
     <script src="../public/js/jquery-3.1.0.min.js" th:src="@{/js/jquery-3.1.0.min.js}"></script>
     <script src="../public/js/blog-scripts.js" th:src="@{/js/blog-scripts.js}"></script>
     <meta th:include="this :: head" th:remove="tag"/>
-</head><body><header  th:fragment="site-header">
+</head>
+<body>
+<header th:fragment="site-header">
+    <header>
+        <nav class="navbar navbar-custom navbar-expand-md navbar-dark ">
+            <div class="container-fluid ">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#Navbar">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <a href="/"><img src="../public/img/logo.png" height="60" th:href="@{/}" th:src="@{/img/logo.png}"/>
+                </a>
+                <div class="collapse navbar-collapse" id="Navbar">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item "><a class="nav-link" href="index.html" th:href="@{/}">Home</a></li>
+                        <li class="nav-item"><a class="nav-link" href="users/login.html"
+                                                th:href="@{/users/login}">Login</a>
+                        </li>
+                        <li class="nav-item"><a class="nav-link" href="users/register.html"
+                                                th:href="@{/users/register}">Register</a>
+                        </li>
+                        <li class="nav-item"><a class="nav-link" href="posts/index.html" th:href="@{/posts}">Posts</a>
+                        </li>
+                        <li class="nav-item"><a class="nav-link" href="posts/create.html" th:href="@{/posts/create}">Create
+                            Post</a></li>
+                        <li class="nav-item"><a class="nav-link" href="users/index.html" th:href="@{/users}">Users</a>
+                        </li>
+                    </ul>
+                    <div id="logged-in-info"><span>Hello, <b>(user)</b></span>
+                        <form method="post" th:action="@{/users/logout}">
+                            <input type="submit" value="Logout"/>
+                        </form>
 
-    <nav class="navbar navbar-light navbar-expand-sm   ">
-        <div class="container-fluid ">
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#Navbar">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <a   href="#"><img  src="../public/img/logo.png" height="60"  th:src="@{/img/logo.png}"/> </a>
-            <div class="collapse navbar-collapse" id="Navbar">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item "><a class="nav-link" href="index.html" th:href="@{/}">Home</a></li>
-                    <li class="nav-item"><a class="nav-link"  href="users/login.html" th:href="@{/users/login}">Login</a></li>
-                    <li class="nav-item"><a class="nav-link" href="users/register.html" th:href="@{/users/register}">Register</a></li>
-                    <li class="nav-item"><a class="nav-link" href="posts/index.html" th:href="@{/posts}">Posts</a></li>
-                    <li class="nav-item"><a class="nav-link" href="posts/create.html" th:href="@{/posts/create}">Create Post</a></li>
-                    <li class="nav-item"><a class="nav-link" href="users/index.html" th:href="@{/users}">Users</a></li>
-                </ul>
-                <div   id="logged-in-info"> <span>Hello, <b>(user)</b></span>
-                    <form method="post" th:action="@{/users/logout}">
-                        <input type="submit" value="Logout"/>
-                    </form>
-
+                    </div>
                 </div>
             </div>
-        </div>
-    </nav>
+        </nav>
 
-</header> <h1>Welcome</h1>
-<p>Welcome to the Spring MVC Blog.</p> <footer th:fragment="site-footer">
+        <div class="jumbotron d-flex justify-content-center ">
+            <form action="#">
+                <div class="input-group ">
+                    <input type="text" class="form-control" placeholder="Search" name="search"/>
+                    <div class="input-group-addon">
+                        <button class="btn btn-default btn-lg" type="submit"><i class="fa fa-search"></i></button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+    </header>
+
+
+    <!--<ul id="messages" th:with="notifyMessages=${session[T(shop.services-->
+    <!--.NotificationServiceImpl).NOTIFY_MSG_SESSION_KEY]}">-->
+    <!--<li class="alert" th:each="msg : ${notifyMessages}" th:text="${msg.text}"-->
+    <!--th:class="${#strings(msg.alert)}">-->
+    <!--</li>-->
+    <!--<span th:if="${notifyMessages}" th:remove="all" th:text="${session.remove(-->
+    <!--T(shop.services.NotificationServiceImpl).NOTIFY_MSG_SESSION_KEY)}"></span>-->
+
+    <!--</ul>-->
+    <div th:with="notifyMessages=${session[T(shop.services.NotificationServiceImpl).NOTIFY_MSG_SESSION_KEY]}">
+        <div th:each="msg:${notifyMessages}">
+            <div class="alert alert-error" th:if="${#strings.startsWith(msg.type,'E')}" th:text="${msg.text}">
+                <span th:if="${notifyMessages}" th:remove="all"
+                      th:text="${session.remove(T(shop.services.NotificationServiceImpl).NOTIFY_MSG_SESSION_KEY)}"></span>
+            </div>
+            <div class="alert alert-info" th:if="${#strings.startsWith(msg.type,'I')}" th:text="${msg.text}">
+                <span th:if="${notifyMessages}" th:remove="all"
+                      th:text="${session.remove(T(shop.services.NotificationServiceImpl).NOTIFY_MSG_SESSION_KEY)}"></span>
+            </div>
+        </div>
+    </div>
+
+
+</header>
+<footer th:fragment="site-footer">
     &copy; Spring MVC Blog System, 2016
-</footer></body></html>
+</footer>
+</body>
+</html>

@@ -2,42 +2,38 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head th:replace="layout :: site-head">
-
-    <title>Welcome to Spring MVC Blog</title>
+    <title th:text="${post.title}">View Post</title>
 </head>
 
 <body>
-<header th:replace="layout :: site-header" ></header>
-
-
+<header th:replace="layout :: site-header"></header>
 
 
 <div class="sidenav">
     <h2 style="padding-left: 10px; color: #804d4d">Recent Posts</h2>
-    <a href="#" th:each="p : ${latest5posts}" th:text="${p.title}" th:href="@{posts/view/{id}/(id=${p.id})}"></a>
+    <a href="/"  th:each="p : ${latest5posts}" th:text="${p.title}" th:href="@{/posts/view/{id}/(id=${p.id})}"></a>
+
 </div>
 <main id="posts" class="container ">
     <!--/*@thymesVar id="latest3posts" type="PostServicStubImplTest"*/-->
-    <article th:each="p: ${latest3posts}" >
+    <article >
         <!--<br/>-->
         <div class="article-content">
-        <h2 class="title " th:text="${p.title}">Post Title</h2>
-        <p class="content" th:utext="${p.body}">Post content</p>
-        <div class="date ">
-            <i >Posted on</i>
-            <span th:text="${#dates.format(p.calendar, 'dd MMMMMMM yyyy')}"> 07-May-2016</span>
-            <span th:if="${p.author}" th:remove="tag">
+            <h2 class="title " th:text="${post.title}">Post Title</h2>
+            <p class="content" th:utext="${post.body}">Post content</p>
+            <div class="date ">
+                <i >Posted on</i>
+                <span th:text="${#dates.format(post.calendar, 'dd MMMMMMM yyyy')}"> 07-May-2016</span>
+                <span th:if="${post.author}" th:remove="tag">
                 <i>by</i>
-                <span th:text="${p.author.name!=null ? p.author.name : p.author.login}">
+                <span th:text="${post.author.name!=null ? post.author.name : post.author.login}">
                     Daga nna
                 </span>
             </span>
-        </div>
             </div>
+        </div>
     </article>
 </main>
-
-
 
 <!--Now is: <b th:text="${execInfo.now.time}">date and time</b>-->
 
