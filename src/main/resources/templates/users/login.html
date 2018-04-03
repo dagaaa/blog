@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="layout :: site-head">
+    <title>Login</title>
+</head>
+
+<body>
+
+<header ></header>
+<div id="messages"
+     th:with="notifyMessages=${session[T(shop.services.NotificationServiceImpl).NOTIFY_MSG_SESSION_KEY]}">
+    <div th:each="msg:${notifyMessages}">
+
+        <div class="alert alert-danger alert-dismissible fade show" role="alert"
+             th:if="${#strings.startsWith(msg.type,'E')}">
+            <span th:text="${msg.text}"></span>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="alert alert-info alert-dismissible fade show" role="alert"
+             th:if="${#strings.startsWith(msg.type,'I')}">
+            <span th:text="${msg.text}"></span>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    </div>
+
+    <span th:if="${notifyMessages}" th:remove="all"
+          th:text="${session.remove(T(shop.services.NotificationServiceImpl).NOTIFY_MSG_SESSION_KEY)}"></span>
+</div>
+<div align="center">
+<a  href="/"><img src="../public/img/logo.png" height="100" th:href="@{/}" th:src="@{/img/logo.png}"/>
+</a>
+</div>
+<h1 align="center">Login in the Blog</h1>
+
+<form  method="post" th:object="${loginForm}">
+    <div class="container formid" >
+    <div><label for="username">Username:</label></div>
+    <input  id="username" type="text" name="username" th:value="*{username}" />
+    <span class="formError" th:if="${#fields.hasErrors('username')}"
+          th:errors="*{username}">Invalid username</span>
+
+    <div><label for="password" th:value="*{password}">Password:</label></div>
+    <input  id="password" type="password" name="password" th:value="*{password}" />
+    <span class="formError" th:if="${#fields.hasErrors('password')}"
+          th:errors="*{password}">Invalid password</span>
+        <div id="groupbutton" align="center"><button type="submit" class="btn btn-success btn-lg" value="Login">Sign in</button></div>
+    </div>
+
+</form>
+<div class="container formid">
+    <a class="links" href="../index.html" th:href="@{/}">Home</a>
+    <a class="links" href="register.html" th:href="@{/users/register}">Register</a></div>
+
+<footer th:replace="layout :: site-footer" ></footer>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+</body>
+
+</html>

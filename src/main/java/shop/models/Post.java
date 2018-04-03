@@ -1,25 +1,36 @@
 package shop.models;
 
+import javax.persistence.*;
+import java.sql.Timestamp;
+import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.Date;
 
+@Entity
+@Table(name = "posts")
 public class Post {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(nullable = false, length = 300)
     private String title;
+    @Lob
+    @Column(nullable = false)
     private String body;
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private User author;
-    private Calendar calendar ;
+    @Column(nullable = false)
+    private Timestamp date;
 
     public Post() {
-        this.calendar=Calendar.getInstance();
+        this.date = new Timestamp(System.currentTimeMillis());
     }
 
-    public Post(Long id,String title, String body, User author, Calendar calendar) {
-        this.id=id;
+    public Post(String title, String body, User author, Timestamp date) {
         this.title = title;
         this.body = body;
         this.author = author;
-        this.calendar = calendar;
+        this.date = date;
     }
 
     public Long getId() {
@@ -50,12 +61,12 @@ public class Post {
         this.author = author;
     }
 
-    public Calendar getCalendar() {
-        return calendar;
+    public Timestamp getDate() {
+        return date;
     }
 
-    public void setCalendar(Calendar calendar) {
-        this.calendar = calendar;
+    public void setCalendar(Timestamp date) {
+        this.date = date;
     }
 
     @Override
@@ -65,7 +76,7 @@ public class Post {
                 ", title='" + title + '\'' +
                 ", body='" + body + '\'' +
                 ", author=" + author +
-                ", date=" + calendar.getTime() +
+                ", date=" + date +
                 '}';
     }
 }

@@ -1,38 +1,43 @@
 package shop.models;
 
+import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
+@Entity
+@Table(name = "users")
 public class User {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String login;
-    private String name;
-    private String passwordHash; // or password
-    private Set<Post> posts = new HashSet<>();
-// TODO   private String email, password in constructor?
 
-    public User(Long id, String name,String login) {
-        this.id=id;
-        this.name=name;
-        this.login = login;
+    @Column(nullable = false, length = 30, unique = true)
+    private String username;
+
+    @Column(length = 60)
+    private String passwordHash;
+
+    @Column(length = 100)
+    private String fullName;
+
+    @OneToMany(mappedBy = "author")
+    private Set<Post> posts = new HashSet<Post>();
+
+    public Long getId() {
+        return id;
     }
 
-    public User() {
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getUsername() {
+        return username;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-    public String getLogin() {
-        return login;
-    }
-
-    public void setLogin(String login) {
-        this.login = login;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getPasswordHash() {
@@ -43,6 +48,14 @@ public class User {
         this.passwordHash = passwordHash;
     }
 
+    public String getFullName() {
+        return fullName;
+    }
+
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
+    }
+
     public Set<Post> getPosts() {
         return posts;
     }
@@ -51,12 +64,22 @@ public class User {
         this.posts = posts;
     }
 
+    public User() {
+    }
+
+    public User(String username, String fullName) {
+        this.username = username;
+        this.fullName = fullName;
+    }
+
+
     @Override
     public String toString() {
         return "User{" +
                 "id=" + id +
-                ", login='" + login + '\'' +
+                ", username='" + username + '\'' +
                 ", passwordHash='" + passwordHash + '\'' +
+                ", fullName='" + fullName + '\'' +
                 '}';
     }
 }

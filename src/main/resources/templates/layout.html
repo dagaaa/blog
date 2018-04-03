@@ -48,7 +48,7 @@
                     </ul>
                     <div id="logged-in-info"><span>Hello, <b>(user)</b></span>
                         <form method="post" th:action="@{/users/logout}">
-                            <input type="submit" value="Logout"/>
+                            <button class="btn btn-lg" type="submit" value="Logout">Logout</button>
                         </form>
 
                     </div>
@@ -70,31 +70,36 @@
     </header>
 
 
-    <!--<ul id="messages" th:with="notifyMessages=${session[T(shop.services-->
-    <!--.NotificationServiceImpl).NOTIFY_MSG_SESSION_KEY]}">-->
-    <!--<li class="alert" th:each="msg : ${notifyMessages}" th:text="${msg.text}"-->
-    <!--th:class="${#strings(msg.alert)}">-->
-    <!--</li>-->
-    <!--<span th:if="${notifyMessages}" th:remove="all" th:text="${session.remove(-->
-    <!--T(shop.services.NotificationServiceImpl).NOTIFY_MSG_SESSION_KEY)}"></span>-->
-
-    <!--</ul>-->
-    <div th:with="notifyMessages=${session[T(shop.services.NotificationServiceImpl).NOTIFY_MSG_SESSION_KEY]}">
+    <div id="messages"
+         th:with="notifyMessages=${session[T(shop.services.NotificationServiceImpl).NOTIFY_MSG_SESSION_KEY]}">
         <div th:each="msg:${notifyMessages}">
-            <div class="alert alert-error" th:if="${#strings.startsWith(msg.type,'E')}" th:text="${msg.text}">
-                <span th:if="${notifyMessages}" th:remove="all"
-                      th:text="${session.remove(T(shop.services.NotificationServiceImpl).NOTIFY_MSG_SESSION_KEY)}"></span>
+
+            <div class="alert alert-danger alert-dismissible fade show" role="alert"
+                 th:if="${#strings.startsWith(msg.type,'E')}">
+                <span th:text="${msg.text}"></span>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
-            <div class="alert alert-info" th:if="${#strings.startsWith(msg.type,'I')}" th:text="${msg.text}">
-                <span th:if="${notifyMessages}" th:remove="all"
-                      th:text="${session.remove(T(shop.services.NotificationServiceImpl).NOTIFY_MSG_SESSION_KEY)}"></span>
+            <div class="alert alert-info alert-dismissible fade show" role="alert"
+                 th:if="${#strings.startsWith(msg.type,'I')}">
+                <span th:text="${msg.text}"></span>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
         </div>
-    </div>
 
+        <span th:if="${notifyMessages}" th:remove="all"
+              th:text="${session.remove(T(shop.services.NotificationServiceImpl).NOTIFY_MSG_SESSION_KEY)}"></span>
+    </div>
+    <!--<div class="sidenav">-->
+        <!--<h2 style="padding-left: 10px; color: #804d4d">Recent Posts</h2>-->
+        <!--<a href="#" th:each="p : ${latest5posts}" th:text="${p.title}" th:href="@{posts/view/{id}/(id=${p.id})}"></a>-->
+    <!--</div>-->
 
 </header>
-<footer th:fragment="site-footer">
+<footer class="d-flex align-items-end" th:fragment="site-footer">
     &copy; Spring MVC Blog System, 2016
 </footer>
 </body>

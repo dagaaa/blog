@@ -6,18 +6,25 @@
     <title>Welcome to Spring MVC Blog</title>
 </head>
 
+
 <body>
 <header th:replace="layout :: site-header" ></header>
 
 
 
 
+<!--<div class="sidenav">-->
+    <!--<h2 style="padding-left: 10px; color: #804d4d">Recent Posts</h2>-->
+    <!--<a href="#" th:each="p : ${latest5posts}" th:text="${p.title}" th:href="@{posts/view/{id}/(id=${p.id})}"></a>-->
+<!--</div>-->
 <div class="sidenav">
     <h2 style="padding-left: 10px; color: #804d4d">Recent Posts</h2>
     <a href="#" th:each="p : ${latest5posts}" th:text="${p.title}" th:href="@{posts/view/{id}/(id=${p.id})}"></a>
 </div>
 <main id="posts" class="container ">
     <!--/*@thymesVar id="latest3posts" type="PostServicStubImplTest"*/-->
+
+
     <article th:each="p: ${latest3posts}" >
         <!--<br/>-->
         <div class="article-content">
@@ -25,10 +32,10 @@
         <p class="content" th:utext="${p.body}">Post content</p>
         <div class="date ">
             <i >Posted on</i>
-            <span th:text="${#dates.format(p.calendar, 'dd MMMMMMM yyyy')}"> 07-May-2016</span>
+            <span th:text="${#dates.format(p.date, 'dd MMMMMMM yyyy')}"> 07-May-2016</span>
             <span th:if="${p.author}" th:remove="tag">
                 <i>by</i>
-                <span th:text="${p.author.name!=null ? p.author.name : p.author.login}">
+                <span th:text="${p.author.fullName!=null ? p.author.fullName : p.author.username}">
                     Daga nna
                 </span>
             </span>
