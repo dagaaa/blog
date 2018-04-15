@@ -10,8 +10,8 @@ import shop.models.Post;
 import java.util.List;
 
 @Repository
-public interface PostRepository  extends JpaRepository<Post,Long>{
-@Query ("select  p from Post p left join fetch p.author order by p.date desc")
+public interface PostRepository extends JpaRepository<Post, Long> {
+    @Query("select  p from Post p left join fetch p.author order by p.date desc")
     List<Post> findLatest5Posts(Pageable pageable);
 
 

@@ -14,7 +14,7 @@ import java.util.List;
 public class UserServiceStubImpl implements UserService {
     @Autowired
     private UserRepository userRepository;
-    private HashMap<String,User> users= new HashMap<>();
+    private HashMap<String, User> users = new HashMap<>();
 
 
     @Override
@@ -44,11 +44,11 @@ public class UserServiceStubImpl implements UserService {
 
     @Override
     public boolean authenticate(String username, String password) {
-        int i=0;
-        for(User u:findAll()){
-            users.put(String.valueOf(i),u); // need to be changed when user created should be added to hashmap
+        int i = 0;
+        for (User u : findAll()) {
+            users.put(String.valueOf(i), u); // need to be changed when user created should be added to hashmap
             i++;
-            System.out.println(i+"     "+u); // to chceck information
+            System.out.println(i + "     " + u); // to chceck information
         }
         return users.get(password).getUsername().equals(username);
     }

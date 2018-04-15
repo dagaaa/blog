@@ -11,9 +11,10 @@ import java.util.List;
 
 @Service
 @Primary
-public class PostServiceJpaImpl implements PostService{
+public class PostServiceJpaImpl implements PostService {
     @Autowired
     private PostRepository postRepository;
+
     @Override
     public List<Post> findAll() {
         return postRepository.findAll();
@@ -21,7 +22,7 @@ public class PostServiceJpaImpl implements PostService{
 
     @Override
     public List<Post> findLatest5() {
-             return postRepository.findLatest5Posts(new PageRequest(0,5));
+        return postRepository.findLatest5Posts(new PageRequest(0, 5));
 
     }
 
@@ -42,6 +43,6 @@ public class PostServiceJpaImpl implements PostService{
 
     @Override
     public void deleteById(Long id) {
-    postRepository.delete(id);
+        postRepository.delete(id);
     }
 }

@@ -20,14 +20,14 @@ public class PostsController {
     private NotificationServiceImpl notificationService;
 
     @RequestMapping("posts/view/{id}")
-    public String view(@PathVariable("id") Long id, Model model, LinkedList<Post> latest5posts){
-        Post post= postService.findById(id);
-        if(post==null){
-            notificationService.addErrorMessage("Cannot find post #"+id);
+    public String view(@PathVariable("id") Long id, Model model, LinkedList<Post> latest5posts) {
+        Post post = postService.findById(id);
+        if (post == null) {
+            notificationService.addErrorMessage("Cannot find post #" + id);
             return "redirect:/";
         }
-        model.addAttribute("post",post);
-        model.addAttribute("latest5posts",postService.findLatest5());
+        model.addAttribute("post", post);
+        model.addAttribute("latest5posts", postService.findLatest5());
 
         return "posts/view";
 

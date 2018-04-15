@@ -20,19 +20,19 @@ public class LoginController {
     private NotificationService notificationService;
 
     @RequestMapping("/users/login")
-    public String login(LoginForm loginForm){
+    public String login(LoginForm loginForm) {
         return "users/login";
     }
 
     @RequestMapping(value = "/users/login", method = RequestMethod.POST)
-    public String loginPage(@Valid LoginForm loginForm, BindingResult bindingResult){
-        if(bindingResult.hasErrors()){
+    public String loginPage(@Valid LoginForm loginForm, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
             notificationService.addErrorMessage("Please fill the form correctly");
             return "users/login";
         }
-        if(!userService.authenticate(
-                loginForm.getUsername(),loginForm.getPassword()
-        )){
+        if (!userService.authenticate(
+                loginForm.getUsername(), loginForm.getPassword()
+        )) {
             notificationService.addErrorMessage("Invalid login");
             return "users/login";
         }
